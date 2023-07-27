@@ -50,8 +50,6 @@ public class MainActivity extends AppCompatActivity {
         //GridLayoutManager layout = new GridLayoutManager(this, 2);
         rcvCongViec.setLayoutManager(layout);
 
-
-
         // dữ liệu
         adapter = new CongViecAdapter(this, list);
         rcvCongViec.setAdapter(adapter);

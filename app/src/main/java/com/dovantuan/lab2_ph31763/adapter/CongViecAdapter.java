@@ -28,7 +28,7 @@ import com.dovantuan.lab2_ph31763.model.CongViec;
 public class CongViecAdapter extends RecyclerView.Adapter<CongViecAdapter.viewholder> {
     //bước 2.1
     private final Context context;
-    private  final ArrayList<CongViec> list;
+    private final ArrayList<CongViec> list;
     //bước 2.3
     CongViecDao cvdao;
 
@@ -60,12 +60,11 @@ public class CongViecAdapter extends RecyclerView.Adapter<CongViecAdapter.viewho
         holder.txtLoai.setText(list.get(position).getLoai());
 
         //nếu phần tử nào có trang thái
-        if(list.get(position).getTrangthai() == 1){
+        if (list.get(position).getTrangthai() == 1) {
             holder.chkcv.setChecked(true);
-        }else {
+        } else {
             holder.chkcv.setChecked(false);
         }
-
         //gán lại đôi tượng
         CongViec cv = list.get(position);//truy xuất đến dữ liệu đang được chọn
         //xóa dữ liệu
@@ -81,15 +80,14 @@ public class CongViecAdapter extends RecyclerView.Adapter<CongViecAdapter.viewho
                 buider.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if(cvdao.delete(cv.getId())){
-                          list.clear();//xóa hết dữ liệu trong list
-                          list.addAll(cvdao.selectAll()); //add lại toàn bộ dữ liệu trong list
-                           notifyDataSetChanged();
-                          Toast.makeText(context, "Delete success", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(context, "Delete false", Toast.LENGTH_SHORT).show();
-                }
+                        if (cvdao.delete(cv.getId())) {
+                            list.clear();//xóa hết dữ liệu trong list
+                            list.addAll(cvdao.selectAll()); //add lại toàn bộ dữ liệu trong list
+                            notifyDataSetChanged();
+                            Toast.makeText(context, "Delete success", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(context, "Delete false", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
 
@@ -153,7 +151,7 @@ public class CongViecAdapter extends RecyclerView.Adapter<CongViecAdapter.viewho
     }
     //bước 2 extends class CongViecAdapter
 
-    public void opendialogUpdate(CongViec cv){
+    public void opendialogUpdate(CongViec cv) {
         AlertDialog.Builder buider = new AlertDialog.Builder(context); //tạo đối tượng
         //gán layout vào view
         LayoutInflater infla = ((Activity) context).getLayoutInflater();
@@ -201,20 +199,19 @@ public class CongViecAdapter extends RecyclerView.Adapter<CongViecAdapter.viewho
                 cv.setNoidung(txtnoidungs.getText().toString());
                 cv.setNgay(txtngays.getText().toString());
                 cv.setLoai(txtloais.getText().toString());
-                if(cvdao.update(cv)){
+                if (cvdao.update(cv)) {
                     list.clear();
                     list.addAll(cvdao.selectAll());
                     notifyDataSetChanged();
                     dia.dismiss();
                     Toast.makeText(context, "UPDATE thành công", Toast.LENGTH_SHORT).show();
-                } else{
+                } else {
                     Toast.makeText(context, "UPDATE thất bại", Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
     }
-
 
 
 }
